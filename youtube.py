@@ -1,3 +1,6 @@
+'''
+Klasa Youtube pozwala na wyszukiwanie w yt za pomoca ich api
+'''
 try:
     from urllib.request import Request, urlopen  # Python 3
 except:
@@ -62,6 +65,6 @@ class YoutubeSearch:
 
 
 if __name__ == '__main__':
-    yt=Youtube('AIzaSyDIYMnZXnQ-P7LYEdNQ5sPwUrru0Isn3Js')
-    yt.make_request(order='rating', maxResults='10')
+    yt=Youtube('') # podaj klucz api od google
+    yt.make_request(order='rating', maxResults='10') # podaj zapytania(**kwargs)
     print (yt.getSearchResults())
