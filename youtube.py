@@ -81,7 +81,7 @@ class YoutubeSearch:
 
 
 if __name__ == '__main__':
-    yt=YoutubeSearch('%20AIzaSyDIYMnZXnQ-P7LYEdNQ5sPwUrru0Isn3Js') # podaj klucz api od google
+    yt=YoutubeSearch('') # podaj klucz api od google
     yt.make_request(order='rating', maxResults='10') # podaj zapytania(**kwargs)
     print (yt.get_search_results())
     yt.print_search_results_readable()
