@@ -3,7 +3,7 @@ wczytywanie kryteriow zapytania
 '''
 import re
 
-query_set = {
+QUERY_SET = {
     'query': '',
     'max_result': '',
     'v_type': '',
@@ -16,7 +16,7 @@ def prepare_query_set():
     if(query == ''):
         query = None
         print("niepoprawny format lub nie podano")
-    query_set['query'] = query
+    QUERY_SET['query'] = query
 
     max_result = input("max results:\n")
     if(re.match(r'^([0-9]+)$', str(max_result))):
@@ -24,10 +24,10 @@ def prepare_query_set():
     else:
         max_result = None
         print("niepoprawny format lub nie podano")
-    query_set['max_result'] = max_result
+    QUERY_SET['max_result'] = max_result
 
     video_type = 'video'
-    query_set['v_type'] = video_type
+    QUERY_SET['v_type'] = video_type
 
     v_duration = input("video duration:\n1 - any\n2 - long\n3 - medium\n4 - short\n")
     duration = {
@@ -40,7 +40,7 @@ def prepare_query_set():
     else:
         print("niepoprawny format lub nie podano")
         v_duration = None
-    query_set['v_duration'] = v_duration
+    QUERY_SET['v_duration'] = v_duration
 
     v_order = input("sort by:\n1 - relevance\n2 - upload date\n3 - viewcount\n4 - rating\n")
     order = {
@@ -53,8 +53,8 @@ def prepare_query_set():
     else:
         print("niepoprawny format lub nie podano")
         v_order = None
-    query_set['v_order'] = v_order
+    QUERY_SET['v_order'] = v_order
 
 if __name__ == '__main__':
     prepare_query_set()
-    print (query_set)
+    print (QUERY_SET)
