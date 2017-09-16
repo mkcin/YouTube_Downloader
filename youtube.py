@@ -58,6 +58,22 @@ class YoutubeSearch:
     def get_search_results(self):
         return self.__searchResults
 
+    def print_search_results_readable(self):
+        count=1
+        for item in self.get_search_results()['items']:
+            try:
+                print(count)
+                count+=1
+                print(item["snippet"]["title"])
+                print(item["snippet"]["channelTitle"])
+                print("OPIS: " + item["snippet"]["description"])
+                videoLink = "https://www.youtube.com/watch?v="+item["id"]["videoId"]
+                # print(item["id"]["videoId"])
+                print(videoLink)
+                print()
+            except Exception as exc:
+                print(str(exc))
+
     def get_html(self):
         if(self.__finhtml==''):
             return self.__constHtml
@@ -65,6 +81,7 @@ class YoutubeSearch:
 
 
 if __name__ == '__main__':
-    yt=Youtube('') # podaj klucz api od google
+    yt=YoutubeSearch('%20AIzaSyDIYMnZXnQ-P7LYEdNQ5sPwUrru0Isn3Js') # podaj klucz api od google
     yt.make_request(order='rating', maxResults='10') # podaj zapytania(**kwargs)
-    print (yt.getSearchResults())
+    print (yt.get_search_results())
+    yt.print_search_results_readable()
