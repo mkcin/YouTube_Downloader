@@ -1,2 +1,2 @@
 # YouTube_Downloader
-Just an educational project, searchin in YouTube and downloading
+Just an educational project, searching and downloading from YouTube
