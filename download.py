@@ -2,7 +2,8 @@ from youtube import YoutubeSearch
 from query_set import QUERY_SET, prepare_query_set
 from youtube_dl_user import download
 import re
-from config import API_KEY
+from config import API_KEY, DEST_PATH
+import os
 
 '''
 tworzenie zapytania i wypisywanie wynikow wyszukiwania
@@ -37,7 +38,7 @@ if(what == 'music'):
     # print (choice)
     for ch in choice:
         if(ch != ' '):
-            if(not re.match(r'^([0-9]+)$', str(ch)) and int(ch) >= 1 and int(ch) <= len(yt.get_search_results()['items'])):
+            if(not (re.match(r'^([0-9]+)$', str(ch)) and int(ch) >= 1 and int(ch) <= len(yt.get_search_results()['items']))):
                 continue
             else:
                 videoLink=yt.get_nth_link(int(ch)-1)
@@ -45,21 +46,9 @@ if(what == 'music'):
     download(videoLinks, 'music')
 else:
     choice = 0
-    if(QUERY_SET['max_result'] != 1 and QUERY_SET['max_result'] != None):
-        choice = input('number of video:\n')
-        if(not re.match(r'^([0-9]+)$', str(choice)) and int(choice) >= 1 and int(choice) <= len(yt.get_search_results()['items'])):
-            choice = 1
-        else:
-            choice = int(choice)
-    else:
-        if(QUERY_SET['max_result'] == None):
-            choice = input('number of video:\n')
-            if(not re.match(r'^([0-9]+)$', str(choice)) and int(choice) >= 1 and len(yt.get_search_results()['items']) <= 5):
-                choice = 1
-            else:
-                choice = int(choice)
-        else:
-            choice = 1
+    choice = input('number of video:\n')
+    if(not (re.match(r'^([0-9]+)$', str(choice)) and int(choice) >= 1 and int(choice) <= len(yt.get_search_results()['items']))):
+        choice=1
     # print(yt.get_search_results())
     videoLink=yt.get_nth_link(int(choice)-1)
     download([videoLink], 'video')
