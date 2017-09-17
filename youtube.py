@@ -17,6 +17,7 @@ class YoutubeSearch:
         self.__constHtml = 'https://www.googleapis.com/youtube/v3/search?part=snippet'
         self.__finhtml = ''
         self.__searchResults = {}
+        self.__links=[]
 
     def __repr__(self):
         return ("Youtube({})".format(self.__apiKey))
@@ -66,13 +67,17 @@ class YoutubeSearch:
                 count+=1
                 print(item["snippet"]["title"])
                 print(item["snippet"]["channelTitle"])
-                print("OPIS: " + item["snippet"]["description"])
+                print("DESCRIPTION: " + item["snippet"]["description"])
                 videoLink = "https://www.youtube.com/watch?v="+item["id"]["videoId"]
+                self.__links.append(videoLink)
                 # print(item["id"]["videoId"])
                 print(videoLink)
                 print()
             except Exception as exc:
                 print(str(exc))
+
+    def get_nth_link(self, n):
+        return self.__links[n]
 
     def get_html(self):
         if(self.__finhtml==''):
@@ -81,7 +86,7 @@ class YoutubeSearch:
 
 
 if __name__ == '__main__':
-    yt=YoutubeSearch('%20AIzaSyDIYMnZXnQ-P7LYEdNQ5sPwUrru0Isn3Js') # podaj klucz api od google
+    yt=YoutubeSearch('') # podaj klucz api od google
     yt.make_request(order='rating', maxResults='10') # podaj zapytania(**kwargs)
-    print (yt.get_search_results())
+    print (json.dumps(yt.get_search_results(), indent=2))
     yt.print_search_results_readable()
