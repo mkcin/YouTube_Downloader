@@ -2,7 +2,7 @@ from youtube import YoutubeSearch
 from query_set import QUERY_SET, prepare_query_set
 from youtube_dl_user import download
 import re
-from config import API_KEY, DEST_PATH
+from config import API_KEY
 import os
 
 '''
