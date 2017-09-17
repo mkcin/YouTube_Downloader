@@ -5,7 +5,6 @@ try:
     from urllib.request import Request, urlopen  # Python 3
 except:
     from urllib2 import Request, urlopen  # Python 2
-
 import requests
 import json
 import youtube_dl
@@ -86,7 +85,9 @@ class YoutubeSearch:
 
 
 if __name__ == '__main__':
-    yt=YoutubeSearch('') # podaj klucz api od google
+    from config import API_KEY
+
+    yt=YoutubeSearch(API_KEY) # podaj klucz api od google
     yt.make_request(order='rating', maxResults='10') # podaj zapytania(**kwargs)
     print (json.dumps(yt.get_search_results(), indent=2))
     yt.print_search_results_readable()
