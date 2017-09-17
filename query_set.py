@@ -2,6 +2,10 @@
 wczytywanie kryteriow zapytania
 '''
 import re
+try:
+    from urllib.request import quote
+except:
+    from urlli2 import quote
 
 QUERY_SET = {
     'query': '',
@@ -15,8 +19,10 @@ def prepare_query_set():
     query = input("what to search (nothing given would search most popular videos I guess):\n")
     if(query == ''):
         query = None
+        QUERY_SET['query'] = query
         # print("default\n")
-    QUERY_SET['query'] = query
+    else:
+        QUERY_SET['query'] = quote(query)
 
     max_result = input("how many results (default 5):\n")
     if(re.match(r'^([0-9]+)$', str(max_result))):
