@@ -43,11 +43,13 @@ def ask_for_flags():
 
 def download(vids, what):
     if(what == 'video'):
+        vid = vids[0]
+        print(vid)
         ydl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s%(ext)s'})
         with ydl:
             result = ydl.extract_info(
                 vid,
-                    download=False # We just want to extract the info
+                download=False # We just want to extract the info
             )
         video = result
         # print(video)
@@ -76,7 +78,7 @@ def download(vids, what):
         choice = input(':   ')
         if(not re.match(r'^([0-9]+)$', str(choice)) and int(choice) >= 1 and int(choice) <= int(count-1)):
             choice = str(count-1)
-        opt = ['-cif', str(choices[choice][0]+'+'+str(audio)), vids[0]]
+        opt = ['-cif', str(choices[choice][0]+'+'+str(audio)), vid]
 
         youtube_dl.main(opt)
     else:
