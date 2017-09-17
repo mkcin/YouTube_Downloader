@@ -76,9 +76,9 @@ def download(vids, what):
             count += 1
         # print(choices)
         choice = input(':   ')
-        if(not re.match(r'^([0-9]+)$', str(choice)) and int(choice) >= 1 and int(choice) <= int(count-1)):
+        if(not (re.match(r'^([0-9]+)$', str(choice)) and int(choice) >= 1 and int(choice) <= int(count-1))):
             choice = str(count-1)
-        opt = ['-cif', str(choices[choice][0]+'+'+str(audio)), vid]
+        opt = ['-cif', str(choices[choice][0]+'+'+str(audio)), '-o', '%(title)s.%(ext)s', vid]
 
         youtube_dl.main(opt)
     else:
@@ -100,7 +100,7 @@ def download(vids, what):
         #     if(first_word == 'audio'):
         #         opt = ['-f', f, vid]
         #         youtube_dl.main(opt)
-        opt = ['--extract-audio', '--audio-format',  'mp3']
+        opt = ['--extract-audio', '--audio-format',  'mp3', '-o', '%(title)s.%(ext)s']
         for v in vids:
             opt.append(v)
         youtube_dl.main(opt)
